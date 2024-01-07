@@ -40,7 +40,7 @@ endif
 protoc-go:
 	protoc --go_opt=module=${GO_MODULE} --go_out=. \
 	--go-grpc_opt=module=${GO_MODULE} --go-grpc_out=. \
-	./pb/hello/*.proto ./pb/payment/*.proto ./pb/transaction/*.proto \
+	./pkg/pb/hello/*.proto ./pkg/pb/payment/*.proto ./pkg/pb/transaction/*.proto \
 
 .PHONY: build
 build: clean protoc-go
