@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package transaction;
+
+option go_package = "github.com/pvsnp9/grpc-example/pkg/protogen/transaction";
+
+//messages 
+message CartItem {
+    string item_id = 1 [json_name = "item_id"];
+    uint32 quantity = 2;
+    uint32 item_price = 3 [json_name = "item_price"];
+    bool taxable = 4; 
+}
+
+message Cart {
+    string cart_id = 1 [json_name = "cart_id "];
+    repeated CartItem items = 2;
+}

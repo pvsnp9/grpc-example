@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package hello;
+
+option go_package = "github.com/pvsnp9/grpc-example/pkg/protogen/hello";
+
+// serivces
+
+service HelloService {
+    rpc SayHello(HelloRequest) returns (HelloResponse){}
+}
+
+
+// messages 
+message HelloRequest{
+    string name = 1;
+}
+
+message HelloResponse {
+    string greet = 1;
+}
+
