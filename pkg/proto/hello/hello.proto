@@ -9,6 +9,7 @@ option go_package = "github.com/pvsnp9/grpc-example/pkg/protogen/hello";
 service HelloService {
     rpc SayHello(HelloRequest) returns (HelloResponse){}
     rpc sayManyHellos(HelloRequest) returns (stream HelloResponse){}
+    rpc SayHelloToEveryOne(stream HelloRequest) returns (HelloResponse){}
 }
 
 
