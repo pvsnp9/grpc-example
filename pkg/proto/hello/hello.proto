@@ -10,6 +10,7 @@ service HelloService {
     rpc SayHello(HelloRequest) returns (HelloResponse){}
     rpc sayManyHellos(HelloRequest) returns (stream HelloResponse){}
     rpc SayHelloToEveryOne(stream HelloRequest) returns (HelloResponse){}
+    rpc SayHelloContinous(stream HelloRequest) returns (stream HelloResponse){}
 }
 
 
