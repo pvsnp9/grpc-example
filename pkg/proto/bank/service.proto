@@ -3,10 +3,12 @@ package bank;
 
 import "pkg/proto/bank/type/account.proto";
 import "pkg/proto/bank/type/exchange.proto";
+import "pkg/proto/bank/type/transaction.proto";
 
 option go_package = "github.com/pvsnp9/grpc-example/pkg/protogen/bank";
 
 service BankService {
     rpc GetCurrentBalance(CurrentBalanceRequest) returns (CurrentBalanceResponse){}
     rpc FetchExchangeRates(ExchangeRateRequest) returns (stream ExchangeRateResponse){}
+    rpc SummarizeTransactions( stream Transaction) returns (TransactionSummary){}
 }
