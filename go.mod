@@ -3,6 +3,7 @@ module github.com/pvsnp9/grpc-example
 go 1.18
 
 require (
+	google.golang.org/genproto v0.0.0-20231106174013-bbf56f31fb17
 	google.golang.org/grpc v1.61.0
 	google.golang.org/protobuf v1.32.0
 )
