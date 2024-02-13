@@ -41,7 +41,7 @@ protoc-go:
 	protoc --go_opt=module=${GO_MODULE} --go_out=. \
 	--go-grpc_opt=module=${GO_MODULE} --go-grpc_out=. \
 	./pkg/proto/hello/*.proto ./pkg/proto/payment/*.proto ./pkg/proto/transaction/*.proto \
-	./pkg/proto/bank/*.proto ./pkg/proto/bank/type/*.proto
+	./pkg/proto/bank/*.proto ./pkg/proto/bank/type/*.proto ./pkg/proto/resiliency/*.proto
 
 
 .PHONY: build

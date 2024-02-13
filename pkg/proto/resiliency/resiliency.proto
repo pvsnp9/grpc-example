@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package resiliency;
+
+option go_package = "github.com/pvsnp9/grpc-example/pkg/protogen/resiliency";
+
+message ResiliencyRequest {
+    int32 min_delay_second = 1 [json_name = "min_delay_second"];
+    int32 max_delay_second = 2 [json_name = "max_delay_second"];
+    repeated uint32 status_code = 3 [json_name = "status_code"];
+}
+
+message ResiliencyResponse {
+    string dummy_string = 1 [json_name = "dummy_string"];
+}
+
+service ResiliencyService {
+    rpc UnaryResiliency(ResiliencyRequest) returns (ResiliencyResponse){}
+    rpc ServerStreamingResiliency(ResiliencyRequest) returns (stream ResiliencyResponse){}
+    rpc CientStreamingResiliency( stream ResiliencyRequest) returns (ResiliencyResponse) {}
+    rpc BidirectionalResiliency( stream ResiliencyRequest) returns (stream ResiliencyResponse) {}
+
+}
