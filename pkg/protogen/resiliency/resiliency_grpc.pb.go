@@ -312,3 +312,299 @@ var ResiliencyService_ServiceDesc = grpc.ServiceDesc{
 	},
 	Metadata: "pkg/proto/resiliency/resiliency.proto",
 }
+
+const (
+	ResiliencyWithMetadataService_UnaryResiliencyWithMetadata_FullMethodName           = "/resiliency.ResiliencyWithMetadataService/UnaryResiliencyWithMetadata"
+	ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadata_FullMethodName = "/resiliency.ResiliencyWithMetadataService/ServerStreamingResiliencyWithMetadata"
+	ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadata_FullMethodName  = "/resiliency.ResiliencyWithMetadataService/CientStreamingResiliencyWithMetadata"
+	ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadata_FullMethodName   = "/resiliency.ResiliencyWithMetadataService/BidirectionalResiliencyWithMetadata"
+)
+
+// ResiliencyWithMetadataServiceClient is the client API for ResiliencyWithMetadataService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ResiliencyWithMetadataServiceClient interface {
+	UnaryResiliencyWithMetadata(ctx context.Context, in *ResiliencyRequest, opts ...grpc.CallOption) (*ResiliencyResponse, error)
+	ServerStreamingResiliencyWithMetadata(ctx context.Context, in *ResiliencyRequest, opts ...grpc.CallOption) (ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadataClient, error)
+	CientStreamingResiliencyWithMetadata(ctx context.Context, opts ...grpc.CallOption) (ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadataClient, error)
+	BidirectionalResiliencyWithMetadata(ctx context.Context, opts ...grpc.CallOption) (ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadataClient, error)
+}
+
+type resiliencyWithMetadataServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewResiliencyWithMetadataServiceClient(cc grpc.ClientConnInterface) ResiliencyWithMetadataServiceClient {
+	return &resiliencyWithMetadataServiceClient{cc}
+}
+
+func (c *resiliencyWithMetadataServiceClient) UnaryResiliencyWithMetadata(ctx context.Context, in *ResiliencyRequest, opts ...grpc.CallOption) (*ResiliencyResponse, error) {
+	out := new(ResiliencyResponse)
+	err := c.cc.Invoke(ctx, ResiliencyWithMetadataService_UnaryResiliencyWithMetadata_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *resiliencyWithMetadataServiceClient) ServerStreamingResiliencyWithMetadata(ctx context.Context, in *ResiliencyRequest, opts ...grpc.CallOption) (ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadataClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ResiliencyWithMetadataService_ServiceDesc.Streams[0], ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadata_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &resiliencyWithMetadataServiceServerStreamingResiliencyWithMetadataClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadataClient interface {
+	Recv() (*ResiliencyResponse, error)
+	grpc.ClientStream
+}
+
+type resiliencyWithMetadataServiceServerStreamingResiliencyWithMetadataClient struct {
+	grpc.ClientStream
+}
+
+func (x *resiliencyWithMetadataServiceServerStreamingResiliencyWithMetadataClient) Recv() (*ResiliencyResponse, error) {
+	m := new(ResiliencyResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *resiliencyWithMetadataServiceClient) CientStreamingResiliencyWithMetadata(ctx context.Context, opts ...grpc.CallOption) (ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadataClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ResiliencyWithMetadataService_ServiceDesc.Streams[1], ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadata_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &resiliencyWithMetadataServiceCientStreamingResiliencyWithMetadataClient{stream}
+	return x, nil
+}
+
+type ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadataClient interface {
+	Send(*ResiliencyRequest) error
+	CloseAndRecv() (*ResiliencyResponse, error)
+	grpc.ClientStream
+}
+
+type resiliencyWithMetadataServiceCientStreamingResiliencyWithMetadataClient struct {
+	grpc.ClientStream
+}
+
+func (x *resiliencyWithMetadataServiceCientStreamingResiliencyWithMetadataClient) Send(m *ResiliencyRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *resiliencyWithMetadataServiceCientStreamingResiliencyWithMetadataClient) CloseAndRecv() (*ResiliencyResponse, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(ResiliencyResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *resiliencyWithMetadataServiceClient) BidirectionalResiliencyWithMetadata(ctx context.Context, opts ...grpc.CallOption) (ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadataClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ResiliencyWithMetadataService_ServiceDesc.Streams[2], ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadata_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &resiliencyWithMetadataServiceBidirectionalResiliencyWithMetadataClient{stream}
+	return x, nil
+}
+
+type ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadataClient interface {
+	Send(*ResiliencyRequest) error
+	Recv() (*ResiliencyResponse, error)
+	grpc.ClientStream
+}
+
+type resiliencyWithMetadataServiceBidirectionalResiliencyWithMetadataClient struct {
+	grpc.ClientStream
+}
+
+func (x *resiliencyWithMetadataServiceBidirectionalResiliencyWithMetadataClient) Send(m *ResiliencyRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *resiliencyWithMetadataServiceBidirectionalResiliencyWithMetadataClient) Recv() (*ResiliencyResponse, error) {
+	m := new(ResiliencyResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// ResiliencyWithMetadataServiceServer is the server API for ResiliencyWithMetadataService service.
+// All implementations must embed UnimplementedResiliencyWithMetadataServiceServer
+// for forward compatibility
+type ResiliencyWithMetadataServiceServer interface {
+	UnaryResiliencyWithMetadata(context.Context, *ResiliencyRequest) (*ResiliencyResponse, error)
+	ServerStreamingResiliencyWithMetadata(*ResiliencyRequest, ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadataServer) error
+	CientStreamingResiliencyWithMetadata(ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadataServer) error
+	BidirectionalResiliencyWithMetadata(ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadataServer) error
+	mustEmbedUnimplementedResiliencyWithMetadataServiceServer()
+}
+
+// UnimplementedResiliencyWithMetadataServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedResiliencyWithMetadataServiceServer struct {
+}
+
+func (UnimplementedResiliencyWithMetadataServiceServer) UnaryResiliencyWithMetadata(context.Context, *ResiliencyRequest) (*ResiliencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnaryResiliencyWithMetadata not implemented")
+}
+func (UnimplementedResiliencyWithMetadataServiceServer) ServerStreamingResiliencyWithMetadata(*ResiliencyRequest, ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadataServer) error {
+	return status.Errorf(codes.Unimplemented, "method ServerStreamingResiliencyWithMetadata not implemented")
+}
+func (UnimplementedResiliencyWithMetadataServiceServer) CientStreamingResiliencyWithMetadata(ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadataServer) error {
+	return status.Errorf(codes.Unimplemented, "method CientStreamingResiliencyWithMetadata not implemented")
+}
+func (UnimplementedResiliencyWithMetadataServiceServer) BidirectionalResiliencyWithMetadata(ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadataServer) error {
+	return status.Errorf(codes.Unimplemented, "method BidirectionalResiliencyWithMetadata not implemented")
+}
+func (UnimplementedResiliencyWithMetadataServiceServer) mustEmbedUnimplementedResiliencyWithMetadataServiceServer() {
+}
+
+// UnsafeResiliencyWithMetadataServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ResiliencyWithMetadataServiceServer will
+// result in compilation errors.
+type UnsafeResiliencyWithMetadataServiceServer interface {
+	mustEmbedUnimplementedResiliencyWithMetadataServiceServer()
+}
+
+func RegisterResiliencyWithMetadataServiceServer(s grpc.ServiceRegistrar, srv ResiliencyWithMetadataServiceServer) {
+	s.RegisterService(&ResiliencyWithMetadataService_ServiceDesc, srv)
+}
+
+func _ResiliencyWithMetadataService_UnaryResiliencyWithMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResiliencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResiliencyWithMetadataServiceServer).UnaryResiliencyWithMetadata(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResiliencyWithMetadataService_UnaryResiliencyWithMetadata_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResiliencyWithMetadataServiceServer).UnaryResiliencyWithMetadata(ctx, req.(*ResiliencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadata_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ResiliencyRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ResiliencyWithMetadataServiceServer).ServerStreamingResiliencyWithMetadata(m, &resiliencyWithMetadataServiceServerStreamingResiliencyWithMetadataServer{stream})
+}
+
+type ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadataServer interface {
+	Send(*ResiliencyResponse) error
+	grpc.ServerStream
+}
+
+type resiliencyWithMetadataServiceServerStreamingResiliencyWithMetadataServer struct {
+	grpc.ServerStream
+}
+
+func (x *resiliencyWithMetadataServiceServerStreamingResiliencyWithMetadataServer) Send(m *ResiliencyResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadata_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(ResiliencyWithMetadataServiceServer).CientStreamingResiliencyWithMetadata(&resiliencyWithMetadataServiceCientStreamingResiliencyWithMetadataServer{stream})
+}
+
+type ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadataServer interface {
+	SendAndClose(*ResiliencyResponse) error
+	Recv() (*ResiliencyRequest, error)
+	grpc.ServerStream
+}
+
+type resiliencyWithMetadataServiceCientStreamingResiliencyWithMetadataServer struct {
+	grpc.ServerStream
+}
+
+func (x *resiliencyWithMetadataServiceCientStreamingResiliencyWithMetadataServer) SendAndClose(m *ResiliencyResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *resiliencyWithMetadataServiceCientStreamingResiliencyWithMetadataServer) Recv() (*ResiliencyRequest, error) {
+	m := new(ResiliencyRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadata_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(ResiliencyWithMetadataServiceServer).BidirectionalResiliencyWithMetadata(&resiliencyWithMetadataServiceBidirectionalResiliencyWithMetadataServer{stream})
+}
+
+type ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadataServer interface {
+	Send(*ResiliencyResponse) error
+	Recv() (*ResiliencyRequest, error)
+	grpc.ServerStream
+}
+
+type resiliencyWithMetadataServiceBidirectionalResiliencyWithMetadataServer struct {
+	grpc.ServerStream
+}
+
+func (x *resiliencyWithMetadataServiceBidirectionalResiliencyWithMetadataServer) Send(m *ResiliencyResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *resiliencyWithMetadataServiceBidirectionalResiliencyWithMetadataServer) Recv() (*ResiliencyRequest, error) {
+	m := new(ResiliencyRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// ResiliencyWithMetadataService_ServiceDesc is the grpc.ServiceDesc for ResiliencyWithMetadataService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ResiliencyWithMetadataService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "resiliency.ResiliencyWithMetadataService",
+	HandlerType: (*ResiliencyWithMetadataServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UnaryResiliencyWithMetadata",
+			Handler:    _ResiliencyWithMetadataService_UnaryResiliencyWithMetadata_Handler,
+		},
+	},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ServerStreamingResiliencyWithMetadata",
+			Handler:       _ResiliencyWithMetadataService_ServerStreamingResiliencyWithMetadata_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "CientStreamingResiliencyWithMetadata",
+			Handler:       _ResiliencyWithMetadataService_CientStreamingResiliencyWithMetadata_Handler,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "BidirectionalResiliencyWithMetadata",
+			Handler:       _ResiliencyWithMetadataService_BidirectionalResiliencyWithMetadata_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
+	Metadata: "pkg/proto/resiliency/resiliency.proto",
+}
