@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package resiliency;
 
-import "pgk/proto/google/api/annotations.proto";
+import "pkg/proto/google/api/annotations.proto";
 import "pkg/proto/protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/pvsnp9/grpc-example/pkg/protogen/resiliency";
