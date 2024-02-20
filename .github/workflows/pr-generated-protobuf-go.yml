@@ -22,6 +22,10 @@ jobs:
               shell: bash
               run: |
                 make pipeline-build
+            - name: Genrate Go Gateway source
+              shell: bash
+              run: |
+                make pipeline-build-gateway
 
              
 
