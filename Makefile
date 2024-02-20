@@ -66,13 +66,13 @@ endif
 .PHONY: clean-gateway
 clean-gateway:
 ifeq ($(OS), Windows_NT)
-	if exist "protogen\gateway" rd /s /q protogen\gateway
-	mkdir protogen\gateway
-	mkdir protogen\gateway\openapiv2
+	if exist "pkg\protogen\gateway" rd /s /q pkg\protogen\gateway
+	mkdir pkg\protogen\gateway
+	mkdir pkg\protogen\gateway\openapiv2
 else
-	rm -fR ./protogen/gateway 
-	mkdir -p ./protogen/gateway
-	mkdir -p ./protogen/gateway/openapiv2
+	rm -fR ./pkg/protogen/gateway 
+	mkdir -p ./pkg/protogen/gateway
+	mkdir -p ./pkg/protogen/gateway/openapiv2
 endif
 
 
