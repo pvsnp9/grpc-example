@@ -97,7 +97,7 @@ protoc-openapiv2-gateway:
 	--openapiv2_opt logtostderr=true \
 	--openapiv2_opt output_format=yaml \
 	--openapiv2_opt grpc_api_configuration=./pkg/grpc-gateway/config.yml \
-  --openapiv2_opt openapi_configuration=./pkg/grpc-gateway/config.yml \
+  --openapiv2_opt openapi_configuration=./pkg/grpc-gateway/config-openapi.yml \
 	--openapiv2_opt generate_unbound_methods=true \
 	--openapiv2_opt allow_merge=true \
 	--openapiv2_opt merge_file_name=merged \
